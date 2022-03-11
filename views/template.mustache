@@ -1,0 +1,68 @@
+{{>header}}
+<div class="typediv">
+    <h1>Choose a template type...</h1>
+
+    <div class="row">
+        <div class="col-lg-4 template" id="shirt">
+            <h1>Shirt</h1>
+        </div>
+        <div class="col-lg-4 template" id="jacket">
+            <h1>Jacket</h1>
+            <img src = "/images/jacket.png">
+        </div>
+        <div class="col-lg-4 template" id="pants">
+            <h1>Pants</h1>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" id="nextbtn1" disabled>Next</button>
+</div>
+
+<div class="cusdiv" hidden>
+    <h1>Choose possible customizations...</h1>
+
+    <div class="row">
+        <div class="col-sm-3 customization" id="shell">
+            <h1>Shell Fabrics</h1>
+        </div>
+        <div class="col-sm-3 customization" id="lining">
+            <h1>Lining Fabrics</h1>
+        </div>
+        <div class="col-sm-3 customization" id="distress">
+            <h1>Distressing</h1>
+        </div>
+        <div class="col-sm-3 customization" id="screen">
+            <h1>Screen Print</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 customization" id="zip">
+            <h1>Zippers</h1>
+        </div>
+        <div class="col-sm-3 customization" id="emb">
+            <h1>Embroidery</h1>
+        </div>
+        <div class="col-sm-3 customization" id="stich">
+            <h1>Handstich</h1>
+        </div>
+        <div class="col-sm-3 customization" id="buttons">
+            <h1>Buttons</h1>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" id="nextbtn2" disabled>Next</button>
+</div>
+
+<div class="upload" hidden>
+    <h1>Upload a picture of the base garmet...</h1>
+
+    <div class="row">
+        <div class="col-lg-12 customization" id="upload">
+            <h1>Upload Here</h1>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" id="nextbtn3" disabled>Upload</button>
+</div>
+
+<script src="/js/template.js"></script>
+{{>footer}}
