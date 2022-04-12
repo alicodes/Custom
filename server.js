@@ -1,19 +1,30 @@
 const express = require('express');
 const app = express();
+/* const app = require('express')(); */
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 const session = require('express-session');
 const mustacheExpress = require('mustache-express');
 
-const fs = require('fs');
+const moment = require('moment');
+//const fileUpload = require('express-fileupload');
+//const multer = require('multer');
 
 // Include the mustache engine to help us render our pages
 app.engine("mustache", mustacheExpress());
 app.set('view engine', 'mustache');
 app.set('views', __dirname + '/views');
 
+const MessageModel = require('./models/message.js');
+
 // We use the .urlencoded middleware to process form data in the request body,
 // which is something that occurs when we have a POST request.
-//app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+//app.use(fileUpload());
+//app.use(multer({dest: 'public/uploads'}).single('garmet'));
 
 app.use(express.static("public"));
 
@@ -62,8 +73,19 @@ app.use("/designer", require("./controllers/designer"));
 // Customizer home route
 app.use("/customizer", require("./controllers/customizer"));
 
+io.on("connection", socket => {
+    console.log("New socket connection...");
+  
+    socket.emit("message", "Welcome to ChatCord!");
+
+    socket.on("chatMessage", msg => {
+        MessageModel.send("testuser", "testuser2", msg.text, moment().format('YYYY[-]MM[-]DD[ ]HH:mm:ss'))
+    })
+    
+  });
+
 // Sign up route
 //app.use("/forgot", require("./controllers/signup"));
 
 // Start the server
-var server = app.listen(3000, function() {console.log("Server listening...");})
+var server = http.listen(3000, function() {console.log("Server listening...");})

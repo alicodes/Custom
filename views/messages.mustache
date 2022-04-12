@@ -1,0 +1,76 @@
+{{>scriptcss}}
+<style>
+    .inboxmessage:hover {
+        cursor: pointer;
+    }
+</style>
+{{>header}}
+{{>designernav}}
+
+<h2>Your Messages</h2>
+<div class="container row overflow-auto me-0 pe-0">
+    <div class="col me-2">
+        {{#unique}}
+            <div class="row inboxmessage p-2 mb-1 border rounded" id="testuser1">
+                <div class="col">
+                    <img src="/images/button.png">
+                </div>
+                <div class="col">
+                    <span>{{username}}</span>
+                </div>
+                <div class="col">
+                    <span>{{messagetext}}</span>
+                </div>
+                <div class="col">
+                    <span>{{datetime}}</span>
+                </div>
+            </div>
+        {{/unique}}
+    </div>
+    {{#unique}}
+        <div class="col card mx-auto" style="height:600px;">
+            <div class="card-header bg-transparent">
+                <div class="navbar navbar-expand">
+                    <ul class="navbar-nav me-auto align-items-center">
+                        <li class="nav-item">
+                            <a href="#!" class="nav-link">
+                                <div class="position-relative"style="width:50px; height:50px; border-radius:50%; border: 2px solid black; padding: 2px;">
+                                    <img src="/images/button.png" class="img-fluid rounded-circle">
+                                    <span class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                        <span class="visually-hidden">New alerts</span>
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#!" class="nav-link" id="reciever">Button</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="#!" class="nav-link">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body p-2" id="chatbox" style="height:500px; overflow:auto;">
+            </div>
+            <div class="card-footer bg-white position-relative bottom-0 w-100 m-0 p-1">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="msg" placeholder="Type message...">
+                    <div class="input-group-text bg-transparent">
+                        <button class="btn btn-light text-primary" id="sendbtn">
+                            <i class="fa fa-paper-plane"></i> send
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/unique}}
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://unpkg.com/mustache@latest"></script>
+<script src="/js/messages.js"></script>
+{{>footer}}

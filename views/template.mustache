@@ -1,4 +1,28 @@
+{{>scriptcss}}
+<style>
+    /*Temp Css*/
+    .template {
+    border: solid black 3px;
+    }
+
+    .template:hover {
+    cursor: pointer;
+    }
+
+    .customization {
+    border: solid black 3px;
+    }
+
+    .customization:hover {
+    cursor: pointer;
+    }
+    #blah {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
 {{>header}}
+{{>designernav}}
 <div class="typediv">
     <h1>Choose a template type...</h1>
 
@@ -22,31 +46,61 @@
     <h1>Choose possible customizations...</h1>
 
     <div class="row">
-        <div class="col-sm-3 customization" id="shell">
-            <h1>Shell Fabrics</h1>
+        <div class="card w-25">
+            <div class="card-body">
+                <h5 class="card-title">Buttons</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <button type="button" class="btn btn-primary addbtn" value="button">Add</button>
+            </div>
         </div>
-        <div class="col-sm-3 customization" id="lining">
-            <h1>Lining Fabrics</h1>
+        <div class="card w-25">
+            <div class="card-body">
+                <h5 class="card-title">Distressing</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <button type="button" class="btn btn-primary addbtn" value="distress">Add</button>
+            </div>
         </div>
-        <div class="col-sm-3 customization" id="distress">
-            <h1>Distressing</h1>
+        <div class="card w-25">
+            <div class="card-body">
+                <h5 class="card-title">Embroidery</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <button type="button" class="btn btn-primary addbtn" value="emb">Add</button>
+            </div>
         </div>
-        <div class="col-sm-3 customization" id="screen">
-            <h1>Screen Print</h1>
+        <div class="card w-25">
+            <div class="card-body">
+                <h5 class="card-title">Handstitch</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <button type="button" class="btn btn-primary addbtn" value="stitch">Add</button>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3 customization" id="zip">
-            <h1>Zippers</h1>
+        <div class="card w-25">
+            <div class="card-body">
+                <h5 class="card-title">Lining Fabrics</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <button type="button" class="btn btn-primary addbtn" value="lining">Add</button>
+            </div>
         </div>
-        <div class="col-sm-3 customization" id="emb">
-            <h1>Embroidery</h1>
+        <div class="card w-25">
+            <div class="card-body">
+                <h5 class="card-title">Screen Print</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <button type="button" class="btn btn-primary addbtn" value="screen">Add</button>
+            </div>
         </div>
-        <div class="col-sm-3 customization" id="stich">
-            <h1>Handstich</h1>
+        <div class="card w-25">
+            <div class="card-body">
+                <h5 class="card-title">Shell Fabrics</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <button type="button" class="btn btn-primary addbtn" value="shell">Add</button>
+            </div>
         </div>
-        <div class="col-sm-3 customization" id="buttons">
-            <h1>Buttons</h1>
+        <div class="card w-25">
+            <div class="card-body">
+                <h5 class="card-title">Zippers</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <button type="button" class="btn btn-primary addbtn" value="zip">Add</button>
+            </div>
         </div>
     </div>
     <button type="button" class="btn btn-primary" id="nextbtn2" disabled>Next</button>
@@ -55,13 +109,28 @@
 <div class="upload" hidden>
     <h1>Upload a picture of the base garmet...</h1>
 
-    <div class="row">
+    <div class="row" id="display_image">
         <div class="col-lg-12 customization" id="upload">
-            <h1>Upload Here</h1>
+            <form action="/designer/upload" method="POST" encType="multipart/form-data" name="postform" id="postform">
+                <div class="form-group">
+                    <h3>Upload Here</h3>
+                    <input type="file" name="garmet" id="garmet" accept="image/*"/><br>
+                    <img id="blah" src="#" width="250" height="200" hidden/>
+                </div>
+                <div class="form-group">
+                    <label for="tname">Enter a name for this template:</label>
+                    <input type="text" id="tname" name="tname"><br>
+
+                    <label for="price">Enter a price for this template:</label>
+                    <input type="number" id="price" name="price"><br>
+
+                    <label for="des">Enter a description for this template:</label>
+                    <textarea id="des" rows="3" cols="50"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary" id="postbtn">Post</button>
+            </form>
         </div>
     </div>
-
-    <button type="button" class="btn btn-primary" id="nextbtn3" disabled>Upload</button>
 </div>
 
 <script src="/js/template.js"></script>
