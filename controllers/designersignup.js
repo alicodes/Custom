@@ -1,6 +1,6 @@
 const express = require('express');
 var router = express.Router()
-const SignupModel = require('../models/designersignup.js')
+const SignupModel = require('../models/signup.js')
 
 // Displays the signup page
 router.get("/", async function(req, res)
@@ -25,7 +25,7 @@ router.post("/attemptsignup", async function(req, res)
   // is the username and password > 1 character in length
   if (req.body.username.length >= 1 && req.body.password.length >= 1 && req.body.email.length >= 1)
   {
-    SignupModel.signup(req.body.username, req.body.password, req.body.email);
+    SignupModel.signup(req.body.username, req.body.password, req.body.email, 'designer');
 
     // set a session key username to login the user
     req.session.signup = true;

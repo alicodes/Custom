@@ -1,20 +1,19 @@
 window.addEventListener("load", function(){
-    let type = 0;
+    let type = "";
     let customizations = [];
-    let image;
 
     $("#shirt").click(function(){
-        type = 1;
+        type = "shirt";
         $("#nextbtn1").removeAttr("disabled");
     });
 
     $("#jacket").click(function(){
-        type = 2;
+        type = "jacket";
         $("#nextbtn1").removeAttr("disabled");
     });
 
     $("#pants").click(function(){
-        type = 3;
+        type = "pants";
         $("#nextbtn1").removeAttr("disabled");
     });
 
@@ -24,11 +23,27 @@ window.addEventListener("load", function(){
     });
 
     $(".addbtn").click(function(){
-        if (customizations.includes($(this).attr("value"))) {
+        let val = $(this).attr("value");
+        let price = "#"+val+"price";
+        let text = "#"+val+"text";
+
+        let index = 0;
+
+        customizations.forEach(element => {
+            if (element.customtype == val){
+                customizations.splice(index, 1);
+            };
+            index++;
+        });
+
+        customizations.push({customtype: val, price: $(price).val(), description: $(text).val()});
+        /* if (customizations.includes($(this).attr("value"))) {
             customizations.splice(customizations.indexOf($(this).attr("value")), 1)
         } else {
             customizations.push($(this).attr("value"));
-        };
+        }; */
+
+        console.log(customizations);
 
         $("#nextbtn2").removeAttr("disabled");
     });
@@ -55,13 +70,11 @@ window.addEventListener("load", function(){
             name: $("#tname").val(),
             type: type,
             customizations: customizations,
-            customimg: "custom img url",
-            customizationDes: "rando",
             image: garmet.files[0].name,
             description: $("#des").val(),
             price: $("#price").val()
         },
-        function(data, status){
+        function(){
             window.location.replace("http://localhost:3000/designer");
         });
         

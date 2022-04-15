@@ -1,0 +1,60 @@
+{{>scriptcss}}
+{{>header}}
+{{>designernav}}
+
+<h5 id="sender">{{username}}</h5>
+
+<h2>Chat-Room</h2>
+<div class="container">
+    <div class="col card mx-auto" style="height:600px;">
+        <div class="card-header bg-transparent">
+            <div class="navbar navbar-expand">
+                <ul class="navbar-nav me-auto align-items-center">
+                    <li class="nav-item">
+                        <a href="#!" class="nav-link">
+                            <div class="position-relative"style="width:50px; height:50px; border-radius:50%; border: 2px solid black; padding: 2px;">
+                                <img src="/images/button.png" class="img-fluid rounded-circle">
+                                <span class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                <span class="visually-hidden">New alerts</span>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!" class="nav-link" id="reciever">{{user}}</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="/designer/messages" class="nav-link">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body p-2" id="chatbox" style="height:500px; overflow:auto;">
+            {{#messages}}
+                <div class="{{outerClass}}">
+                    <div class="pe-2">
+                        <div class="{{innerClass}}">{{messagetext}}</div>
+                        <div class="small">yerp</div>
+                    </div>
+                </div>
+            {{/messages}}
+        </div>
+        <div class="card-footer bg-white position-relative bottom-0 w-100 m-0 p-1">
+            <div class="input-group">
+                <input type="text" class="form-control" id="msg" placeholder="Type message...">
+                <div class="input-group-text bg-transparent">
+                    <button class="btn btn-light text-primary" id="sendbtn">
+                        <i class="fa fa-paper-plane"></i> send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chatroom.js"></script>
+{{>footer}}

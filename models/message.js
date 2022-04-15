@@ -28,4 +28,11 @@ async function recievedmessages(username)
     return (result.rows);
 }
 
-module.exports = {send, allmessages, sentmessages, recievedmessages};
+async function privateMessages(userOne, userTwo)
+{
+    let query = "SELECT * FROM messages WHERE sendername = '"+userOne+"' AND recievername = '"+userTwo+"' OR sendername = '"+userTwo+"' AND recievername = '"+userOne+"' ORDER BY datetime ASC";
+    result = await pool.query(query);
+    return (result.rows);
+}
+
+module.exports = {send, allmessages, sentmessages, recievedmessages, privateMessages};

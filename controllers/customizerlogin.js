@@ -1,6 +1,6 @@
 const express = require('express');
 var router = express.Router()
-const LoginModel = require('../models/customizerlogin.js')
+const LoginModel = require('../models/login.js')
 
 // Displays the login page
 router.get("/", async function(req, res)
@@ -18,10 +18,14 @@ router.get("/", async function(req, res)
 router.post("/attemptlogin", async function(req, res)
 {
   // is the username and password OK?
-  if (await LoginModel.login(req.body.username, req.body.password) == true)
+  if (await LoginModel.login(req.body.username, req.body.password, 'customizer') == true)
   {
     // set a session key username to login the user
     req.session.username = req.body.username;
+
+    req.session.designer = false;
+
+    req.session.customizer = true;
 
     res.redirect("/customizer");
 
@@ -55,7 +59,8 @@ router.post("/attemptlogin", async function(req, res)
 router.get("/logout", async function(req, res)
 {
   delete(req.session.username);
-  delete(req.session.level);
+  delete(req.session.designer);
+  delete(req.session.customizer);
   res.redirect("/home");
 });
 

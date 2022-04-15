@@ -1,0 +1,47 @@
+{{>scriptcss}}
+{{>header}}
+{{#designer}}
+    {{>designernav}}
+{{/designer}}
+{{#customizer}}
+    {{>customizernav}}
+{{/customizer}}
+
+<h2>Orders</h2>
+
+<div class="row">
+    <div class="col-6 border">
+        <h3 class="text-center">Incomplete Orders</h3>
+        <div class="d-flex flex-column">
+        {{#incomplete}}
+            <div class="card text-center" >
+                <h3 class="card-title">{{templatename}}</h3>
+                <span>Designed By: <a href="#" style="text-decoration:none">@{{seller}}</a></span>
+                <img class="card-image mx-auto d-block" src="{{picture}}" style="width:200px;height:200px;">
+                <p class="card-text">{{description}}</p>
+                {{#designer}}
+                    <div class="card-footer">
+                        <form action='/designer/messages/chatroom' method='post'>
+                            <input type="hidden" name="username" value="{{username}}">
+                            <button type="submit" class="btn btn-light text-primary">Complete Order</button>
+                        </form>
+                    </div>
+                {{/designer}}
+            </div>
+        {{/incomplete}}
+        </div>
+    </div>
+    <div class="col-6 border">
+        <h3 class="text-center">Completed Orders</h3>
+        {{#completed}}
+            <div class="card text-center" >
+                <h3 class="card-title">{{templatename}}</h3>
+                <span>Designed By: <a href="#" style="text-decoration:none">@{{seller}}</a></span>
+                <img class="card-image mx-auto d-block" src="{{picture}}" style="width:200px;height:200px;">
+                <p class="card-text">{{description}}</p>
+            </div>
+        {{/completed}}
+    </div>
+</div>
+
+{{>footer}}

@@ -1,6 +1,15 @@
 {{>scriptcss}}
 {{>header}}
-{{>designernav}}
+{{#designer}}
+    {{>designernav}}
+{{/designer}}
+{{#customizer}}
+    {{>customizernav}}
+{{/customizer}}
+{{#home}}
+    {{>homenav}}
+{{/home}}
+
 <h2>Explore Page</h2>
 <div class="row p-4 justify-content-center">
 {{#templates}}
@@ -10,12 +19,16 @@
         <img class="card-image mx-auto d-block" src="{{picture}}" style="width:200px;height:200px;">
         <p class="card-text">{{description}}</p>
         <div class="card-footer position-relative bottom-0 w-100 m-0 p-1">
-            <button class="btn btn-light text-primary" id="sendbtn">
-                Message Designer
-            </button>
-            <button class="btn btn-primary text-light" id="sendbtn">
-                Customize
-            </button>
+            <form action='/designer/messages/chatroom' method='post'>
+                <input type="hidden" name="username" value="{{username}}">
+                <button type="submit" class="btn btn-light text-primary">Message Designer</button>
+            </form>
+            {{#customizer}}
+                <form action='/customizer/customize' method='post'>
+                    <input type="hidden" name="templateId" value="{{templateid}}">
+                    <button type="submit" value="{{username}}" id="custombtn" class="btn btn-primary">Customize</button>
+                </form>
+            {{/customizer}}
         </div>
     </div>
 {{/templates}}

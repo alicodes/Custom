@@ -4,41 +4,49 @@
 
 <h2>Designer Home Page</h2>
 <div class="container">
-<div class="row">
-    <div class="col">
-        <div class="card border-0">
-            <img src="/images/jacket.png" class="card-img-top rounded-circle mx-auto d-block border border-dark" style="width:200px;height:200px;">
-            <div class="card-body">
-                <h5 class="card-title text-center">{{username}}</h5>
-                <div class="text-center">
-                    <a href="#" class="btn btn-primary">Edit Profile</a>
+    <div class="row">
+        <div class="col">
+            <div class="card border-0">
+                <img src="/images/jacket.png" class="card-img-top rounded-circle mx-auto d-block border border-dark" style="width:200px;height:200px;">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{username}}</h5>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-primary">Edit Profile</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <h5>Designer Rating: <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i><i class="fa-regular fa-star"></i></i></h5>
-        <h5>Number of Templates Available: 5</h5>
-        <h5>Number of Orders Completed: 12</h5>
-        <div class="overflow-auto">
-            <p>Profile description shall be written here...Profile description shall be written here...Profile description shall be written here...</p>
+        <div class="col">
+            <h5>Designer Rating: <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i><i class="fa-regular fa-star"></i></i></h5>
+            <h5>Number of Templates Available: 5</h5>
+            <h5>Number of Orders Completed: 12</h5>
+            <div class="overflow-auto">
+                <p>Profile description shall be written here...Profile description shall be written here...Profile description shall be written here...</p>
+            </div>
+            <div class="card col">
+                <a href="/designer/template" style="text-decoration:none">
+                    <h1>+</h1>
+                    <p>Click to add new template</p>
+                </a>
+            </div>
         </div>
     </div>
 </div>
-</div>
 <div class="row">
-    <h3>Templates</h3>
-    <div class="card col">
-        <a href="/designer/template">
-            <h1>+</h1>
-            <p>Click to add new template</p>
-        </a>
-    </div>
-    <div class="card col">
-        <a href="/designer/template">
-            <h1>+</h1>
-            <p>Click to add new template</p>
-        </a>
-    </div>
+    <h3>Templates:</h3>
+    {{#templates}}
+        <div class="card p-2 mb-2 w-50 text-center" >
+            <h3 class="card-title">{{templatename}}</h3>
+            <img class="card-image mx-auto d-block" src="{{picture}}" style="width:200px;height:200px;">
+            <p class="card-text">Description: {{description}}</p>
+            <p class="card-text">Price: ${{price}}</p>
+            <div class="card-footer position-relative bottom-0 w-100 m-0 p-1">
+                <form action='/designer/messages/chatroom' method='post'>
+                    <input type="hidden" name="username" value="{{username}}">
+                    <button type="submit" class="btn btn-danger">Delete Template</button>
+                </form>
+            </div>
+        </div>
+    {{/templates}}
 </div>
 {{>footer}}

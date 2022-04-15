@@ -24,22 +24,25 @@
 {{>header}}
 {{>designernav}}
 <div class="typediv">
-    <h1>Choose a template type...</h1>
+    <h2>Choose a template type...</h2>
 
-    <div class="row">
-        <div class="col-lg-4 template" id="shirt">
-            <h1>Shirt</h1>
+    <div class="d-flex justify-content-evenly p-2">
+        <div class="col-lg-4 template me-1" id="shirt">
+            <h3>Shirt</h3>
+            <img class="img-fluid" src = "/images/shirt.jpg">
         </div>
-        <div class="col-lg-4 template" id="jacket">
-            <h1>Jacket</h1>
-            <img src = "/images/jacket.png">
+        <div class="col-lg-4 template me-1" id="jacket">
+            <h3>Jacket</h3>
+            <img class="img-fluid" src = "/images/jacket.png">
         </div>
-        <div class="col-lg-4 template" id="pants">
-            <h1>Pants</h1>
+        <div class="col-lg-4 template me-1" id="pants">
+            <h3>Pants</h3>
+            <img class="img-fluid" src = "/images/pants.jpg">
         </div>
     </div>
-
-    <button type="button" class="btn btn-primary" id="nextbtn1" disabled>Next</button>
+    <div class="d-flex justify-content-evenly">
+        <button type="button" class="btn btn-primary mt-5" id="nextbtn1" disabled>Next</button>
+    </div>
 </div>
 
 <div class="cusdiv" hidden>
@@ -49,57 +52,76 @@
         <div class="card w-25">
             <div class="card-body">
                 <h5 class="card-title">Buttons</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <button type="button" class="btn btn-primary addbtn" value="button">Add</button>
+                <p class="card-text">Give the option to add custom buttons to the garmet.</p>
+                <input class="rounded" id="Buttonsprice" type="number" placeholder="Enter Price">
+                <input id="Buttonstext" type="text" placeholder="Type Description (optional)">
+                <div class="text-success"><span>Added <i class="fa-solid fa-check"></i></span></div>
+                <div class="text-danger"><span>Please enter price.</span></div>
+                <button type="button" class="btn btn-primary addbtn" value="Buttons">Add</button>
+                <button type="button" class="btn btn-primary addbtn disabled" value="Buttons">Edit</button>
             </div>
         </div>
         <div class="card w-25">
             <div class="card-body">
                 <h5 class="card-title">Distressing</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <button type="button" class="btn btn-primary addbtn" value="distress">Add</button>
+                <p class="card-text">Give the option to add distressing the garmet.</p>
+                <input id="Distressingprice" type="number" placeholder="Enter Price">
+                <input id="Distressingtext" type="text" placeholder="Type Description (optional)">
+                <button type="button" class="btn btn-primary addbtn" value="Distressing">Add</button>
             </div>
         </div>
         <div class="card w-25">
             <div class="card-body">
                 <h5 class="card-title">Embroidery</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <button type="button" class="btn btn-primary addbtn" value="emb">Add</button>
+                <p class="card-text">Give the option to add custom embroidery the garmet.</p>
+                <input id="Embroideryprice" type="number" placeholder="Enter Price">
+                <input id="Embroiderytext" type="text" placeholder="Type Description (optional)">
+                <button type="button" class="btn btn-primary addbtn" value="Embroidery">Add</button>
             </div>
         </div>
         <div class="card w-25">
             <div class="card-body">
                 <h5 class="card-title">Handstitch</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <button type="button" class="btn btn-primary addbtn" value="stitch">Add</button>
+                <p class="card-text">Give the option to handstich the garmet.</p>
+                <input id="Handstitchprice" type="number" placeholder="Enter Price">
+                <input id="Handstitchtext" type="text" placeholder="Type Description (optional)">
+                <button type="button" class="btn btn-primary addbtn" value="Handstitch">Add</button>
             </div>
         </div>
         <div class="card w-25">
             <div class="card-body">
                 <h5 class="card-title">Lining Fabrics</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text">Give the options to customize lining fabrics.</p>
+                <input id="liningprice" type="number" placeholder="Enter Price">
+                <input id="liningtext" type="text" placeholder="Type Description (optional)">
                 <button type="button" class="btn btn-primary addbtn" value="lining">Add</button>
             </div>
         </div>
         <div class="card w-25">
             <div class="card-body">
                 <h5 class="card-title">Screen Print</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text">Give the option to add screen printing to the garmet.</p>
+                <input id="screenprice" type="number" placeholder="Enter Price">
+                <input id="screentext" type="text" placeholder="Type Description (optional)">
                 <button type="button" class="btn btn-primary addbtn" value="screen">Add</button>
             </div>
         </div>
         <div class="card w-25">
             <div class="card-body">
                 <h5 class="card-title">Shell Fabrics</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text">Give the option to add shell fabrics to the garmet.</p>
+                <input id="shellprice" type="number" placeholder="Enter Price">
+                <input id="shelltext" type="text" placeholder="Type Description (optional)">
                 <button type="button" class="btn btn-primary addbtn" value="shell">Add</button>
             </div>
         </div>
         <div class="card w-25">
             <div class="card-body">
                 <h5 class="card-title">Zippers</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <button type="button" class="btn btn-primary addbtn" value="zip">Add</button>
+                <p class="card-text">Give the option to add zippers to the garmet.</p>
+                <input id="Zippersrice" type="number" placeholder="Enter Price">
+                <input id="Zipperstext" type="text" placeholder="Type Description (optional)">
+                <button type="button" class="btn btn-primary addbtn" value="Zippers">Add</button>
             </div>
         </div>
     </div>

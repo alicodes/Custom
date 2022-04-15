@@ -1,5 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 3000
 /* const app = require('express')(); */
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -16,6 +18,7 @@ app.engine("mustache", mustacheExpress());
 app.set('view engine', 'mustache');
 app.set('views', __dirname + '/views');
 
+const TemplateModel = require('./models/template.js');
 const MessageModel = require('./models/message.js');
 
 // We use the .urlencoded middleware to process form data in the request body,
@@ -43,6 +46,9 @@ app.use(function(req,res,next) {
     req.TPL.displaylogin = !req.session.username;
     req.TPL.displaylogout = req.session.username;
     req.TPL.username = req.session.username;
+    req.TPL.designer = req.session.designer;
+    req.TPL.customizer = req.session.customizer;
+    req.TPL.home = !req.session.username;
 
     next();
 });
@@ -73,19 +79,56 @@ app.use("/designer", require("./controllers/designer"));
 // Customizer home route
 app.use("/customizer", require("./controllers/customizer"));
 
+app.get("/explore", async function (req, res){
+    result = await TemplateModel.getTemplates();
+
+    req.TPL.templates = result;
+
+    res.render("explore", req.TPL);
+});
+
+let users = [];
+
+const addUser = (userId, socketId) => {
+    !users.some((user) => user.userId === userId) &&
+        users.push({userId, socketId});
+};
+
+const removeUser = (socketId) => {
+    users = users.filter((user) => user.socketId !== socketId);
+};
+
+const getUser = (userId)=>{
+    return users.find(user=>user.userId === userId);
+};
+
 io.on("connection", socket => {
     console.log("New socket connection...");
   
-    socket.emit("message", "Welcome to ChatCord!");
+    //socket.emit("message", "Welcome to ChatCord!");
+
+    socket.on("addUser", (userId) => {
+        addUser(userId, socket.id);
+        io.emit("getUsers", users);
+    });
+
+    socket.on("sendMesage", ({senderId, recieverId, text}) =>{
+        const user = getUser(recieverId);
+        io.to(user.socketId).emit("message", text);
+    });
+
+    socket.on("disconnect", ()=>{
+        console.log("User disconnected");
+        removeUser(socket.id);
+    });
 
     socket.on("chatMessage", msg => {
-        MessageModel.send("testuser", "testuser2", msg.text, moment().format('YYYY[-]MM[-]DD[ ]HH:mm:ss'))
+        MessageModel.send(msg.sender, msg.reciever, msg.text, moment().format('YYYY[-]MM[-]DD[ ]HH:mm:ss'))
     })
-    
-  });
+});
 
 // Sign up route
 //app.use("/forgot", require("./controllers/signup"));
 
 // Start the server
-var server = http.listen(3000, function() {console.log("Server listening...");})
+var server = http.listen(port, function() {console.log("Server listening...");})

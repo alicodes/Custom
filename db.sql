@@ -33,3 +33,18 @@ CREATE TABLE messages(
     messagetext text NOT NULL,
     datetime TIMESTAMP NOT NULL
 );
+
+CREATE TABLE customizations(
+    customid SERIAL PRIMARY KEY,
+    templateid integer NOT NULL,
+    customtype VARCHAR(30) NOT NULL,
+    price decimal NOT NULL,
+    description text
+);
+
+CREATE TABLE orders(
+    orderid SERIAL PRIMARY KEY,
+    templateid integer NOT NULL,
+    customizations integer [],
+    total decimal NOT NULL
+);
